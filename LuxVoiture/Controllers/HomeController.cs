@@ -13,8 +13,9 @@ namespace LuxVoiture.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(UserModel user)
         {
+            //string? userId = HttpContext.Session.GetString("user_id");
             return View();
         }
 

@@ -21,7 +21,7 @@ namespace LuxVoiture.Controllers
         }
 
         [HttpPost]
-        public JsonResult RegisterUser([FromBody]UserModel user) {
+        public IActionResult RegisterUser([FromBody]UserModel user) {
 
             if (user.UserPwd != user.UserPwdConf)
             {
@@ -32,7 +32,15 @@ namespace LuxVoiture.Controllers
             {
                 user.Id = Guid.NewGuid().ToString();
                 int result = userOps.SaveUser(user);
-                return Json(result);
+                //TO-DO: try catch for db update
+                if (result == 200) 
+                {
+                    //HttpContext.Session.SetString("user_id", user.Id);
+                    return Json(user);
+                    //return RedirectToAction("Index","Home");
+                }
+                else
+                    return Json(500); 
             }
         }
     }

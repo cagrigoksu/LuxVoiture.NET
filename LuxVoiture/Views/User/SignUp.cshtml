@@ -27,7 +27,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/USer/RegisterUser",
+            url: "/User/RegisterUser",
             data: JSON.stringify(user),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -36,9 +36,13 @@
                 if (response == 406) {
                     alert("Your password does not match. Please check your password.");
                 }
-                if (response == 200) 
+                if (response == 500) {
+                    alert("Could not registered.");
+                } 
+                else
                 {
-                    alert("You are registered. Redirecting...");
+                    var url = "@Url.Action("Index", "Home")";
+                    window.location.href = url;
                 }
             },
             failure: function (response) {

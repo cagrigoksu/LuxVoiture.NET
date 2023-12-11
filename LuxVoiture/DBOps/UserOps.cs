@@ -16,6 +16,9 @@ namespace LuxVoiture.DBOps
             var database = client.GetDatabase("LuxVoitureDB");
             var table = database.GetCollection<UserModel>("users");
 
+            user.TimeCreated = DateTime.Now;
+            user.Deleted = false;
+
             table.InsertOne(user);
             return 200;
 
